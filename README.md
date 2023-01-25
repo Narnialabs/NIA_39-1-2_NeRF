@@ -1,1 +1,1 @@
-# NIA_39-1_NeRF
+# NIA_39-2_pytorch_NeRF
