@@ -390,24 +390,15 @@ def testing(tgt_class):
                              chunksize=2**15)
 
         imageA = outputs['rgb_map']#.astype(np.uint8)
-        imageA = imageA.reshape([height, width, 3]).detach().cpu().numpy()
+        imageA_ = imageA.reshape([height, width, 3]).detach().cpu().numpy()
         imageB = images[idx]#.astype(np.uint8)
         imageB = imageB.detach().cpu().numpy()
-        imageB = np.array(imageB, dtype=np.float32)
+        imageB_ = np.array(imageB, dtype=np.float32)
 
-        plt.suptitle(ds_name,y=0.85)
-        plt.subplot(1,2,1)
-        plt.title('pred_rgb')
-        plt.imshow(imageA)
-        plt.subplot(1,2,2)
-        plt.title('true_rgb')
-        plt.imshow(imageB)
-        plt.savefig(testdir+'{}_result.png'.format(ds_name))
-        plt.close()
 
         # 4. Convert the images to grayscale
-        grayA =  mtjin_bgr2gray(imageA)
-        grayB =  mtjin_bgr2gray(imageB)
+        grayA =  mtjin_bgr2gray(imageA_)
+        grayB =  mtjin_bgr2gray(imageB_)
 
         # 5. Compute the Structural Similarity Index (SSIM) between the two
         #    images, ensuring that the difference image is returned
@@ -424,6 +415,17 @@ def testing(tgt_class):
         psnr = -10. * torch.log10(loss)
         psnrs.append(psnr.item())
 
+
+        plt.suptitle(ds_name,y=0.85)
+        plt.subplot(1,2,1)
+        plt.title('pred_rgb (PSNR: {:.2} SSIM: {:.2})'.format(psnr.item(),score))
+        plt.imshow(imageA_)
+        plt.subplot(1,2,2)
+        plt.title('true_rgb')
+        plt.imshow(imageB_)
+        plt.savefig(testdir+'{}_result.png'.format(ds_name))
+        plt.close()
+        
         print('ds_name : {} psnr : {:.4} ssim : {:.4}'.format(ds_name, psnr,score))
 
 if __name__ == '__main__':
@@ -468,7 +470,7 @@ if __name__ == '__main__':
     for folder in [savedir, resultdir, renderingdir,testdir]:
         os.makedirs(folder,exist_ok=True)
 
-    if args.training:
+    if args.training == True:
         for _ in range(10000):
             start = time.time()
             model, fine_model, encode, encode_viewdirs, optimizer, warmup_stopper = init_models()
@@ -490,12 +492,12 @@ if __name__ == '__main__':
         print('')
         print(f'Training Done!')
 
-    if args.testing:
+    if args.testing == True:
         testing(tgt_class)        
         print('')
         print(f'Testing Done!') 
               
-    if args.rendering:
+    if args.rendering == True:
         rendering(tgt_class)
         print('')
         print(f'Rendering Done!') 
