@@ -1,4 +1,4 @@
-# NIA_39-2_pytorch_NeRF
+# NIA_39-1-2_pytorch_NeRF
 
 Reference source : https://github.com/yenchenlin/nerf-pytorch
 Reference Paper : https://arxiv.org/abs/2003.08934
