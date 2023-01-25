@@ -13,7 +13,7 @@ docker_run.sh
 ---------------------------------
 	#도커 이미지명 (nia39-1/ubuntu/pytorch/nerf)
 	
-	## (1) 도커 파일 만들기## 
+	## (1) 도커 파일로 이미지 만들기## 
 	docker build -t nia39-1/ubuntu/pytorch/nerf -< dockerfile
 	
 	#도커 컨테이너 명 (pytorch_nerf)
