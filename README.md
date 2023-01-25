@@ -19,6 +19,7 @@ NIA 39-1-2 3D 에셋-이미지쌍 데이터 (2023.01.31)
 	중
 	- Po : 1-5-16_12_knitted-toy-cat-stand_3_2_1_polygon
 	- Np : 2-21-2_7_retro-style-mint-oven_3_3_1_polygon 
+	
 	하
 	- Po : 1-7-20_20_beige-body-juicer_2_2_1_nurbs
 	- Np : 2-16-12_22_square-pillow-bean-bag_2_4_1_polygon
