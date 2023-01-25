@@ -1,7 +1,7 @@
 # NIA_39-1-2_pytorch_NeRF
 
-Reference source : https://github.com/yenchenlin/nerf-pytorch
-Reference Paper : https://arxiv.org/abs/2003.08934
+- Reference source : https://github.com/yenchenlin/nerf-pytorch
+- Reference Paper : https://arxiv.org/abs/2003.08934
 
 NIA 39-1-2 3D 에셋-이미지쌍 데이터 (2023.01.31)
 
