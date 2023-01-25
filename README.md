@@ -60,3 +60,17 @@ docker_run.sh
 	#"gpu_num"은 내가 사용하고자 하는 gpu의 번호
 	#"config.yaml" 파일에 들어가서 학습하고자하는 에셋 및 학습 iteration을 변경할 수 있음 
 ---------------------------------
+
+### 3. Utils 
+---------------------------------
+	# (1) 정사각 이미지가 아닌경우 crop_images.py 를 이용해서 정사각 이미지로 처리 할 수 있음.
+	python crop_images.py --src_path [소스경로] --tgt_asset [타겟에셋명] --dst_path [저장경로](옵션[default './dataset/data_square/'폴더에 저장됨])
+	
+	# (2) colmap 으로 이미지를 추정해서 pose를 추정한 경우 colmap2nerf.py를 이용해서 nerf가 읽어들일수있는 데이터로 처리해줌.
+	# 사전에 colmap_text 폴더를 만들어서 colmap의 output인 cameras.txt, images.txt를 넣어줌
+	python colmap2nerf.py
+	
+	
+	
+---------------------------------
+	
