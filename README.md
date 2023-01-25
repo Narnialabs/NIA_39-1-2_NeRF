@@ -1,10 +1,9 @@
 # NIA_39-2_pytorch_NeRF
 
-reference source code : https://github.com/yenchenlin/nerf-pytorch
-
+Reference source : https://github.com/yenchenlin/nerf-pytorch
+Reference Paper : https://arxiv.org/abs/2003.08934
 
 NIA 39-1-2 3D 에셋-이미지쌍 데이터 (2023.01.31)
-
 
 # 1. 학습 환경 설치
 
