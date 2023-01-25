@@ -64,40 +64,71 @@ kwargs_sample_stratified = {'n_samples': n_samples
 kwargs_sample_hierarchical = {'perturb': perturb}
 
 
-def load_data(tgt_class,json_path,resized_res=True):
-    metas = {}
 
+x_rot = lambda theta: np.array([[1,0,0,0]
+                               ,[0,np.cos(theta),-np.sin(theta),0]
+                               ,[0,np.sin(theta),np.cos(theta),0]
+                               ,[0,0,0,1]])
+
+y_rot = lambda theta: np.array([[np.cos(theta),0,np.sin(theta),0]
+                               ,[0,1,0,0]
+                               ,[-np.sin(theta),0,np.cos(theta),0]
+                               ,[0,0,0,1]])
+
+z_rot = lambda theta: np.array([[np.cos(theta),-np.sin(theta),0,0]
+                               ,[np.sin(theta),np.cos(theta),0,0]
+                               ,[0,0,1,0]
+                               ,[0,0,0,1]])
+
+
+def load_data(tgt_class, json_path,args,resized_res=False):
+    
     with open(json_path, 'r') as fp:
         meta = json.load(fp)
 
-
-    counts = [0]
-
     imgs = []
     poses = []
-
-
-    for frame in meta['frames'][:]:
-        fname = frame['file_path']
-        fname = fname.split('/')[-1]
+    
+    if args.colmap_pose== True:
+        for i, frame in enumerate(meta['frames']):
+            zfiil_n = str(i).zfill(2)
+            img_fn = 'image_view{}.png'.format(zfiil_n)
+            imgs.append(imageio.imread(f'./dataset/data_square/{tgt_class}/'+img_fn))
+            poses.append(np.array(frame['transform_matrix']))
         
-        imgs.append(imageio.imread('./dataset/data_square/'+tgt_class+'/'+fname))
-        poses.append(np.array(frame['transform_matrix']))
-    imgs = (np.array(imgs) / 255.).astype(np.float32) # keep all 4 channels (RGBA)
-    poses = np.array(poses).astype(np.float32)
-    counts.append(counts[-1] + imgs.shape[0])
+        imgs = (np.array(imgs) / 255.).astype(np.float32) # keep all 4 channels (RGBA)
+        poses = np.array(poses).astype(np.float32)
+        camera_angle_x = float(meta['camera_angle_x'])
+        H, W = imgs.shape[1:3]
+        focal = .5 * W / np.tan(.5 * camera_angle_x)
+        
+    elif args.colmap_pose == False:
+        for i, data in enumerate(meta['cameras']):
+            zfiil_n = str(i).zfill(2)
+            img_fn = 'image_view{}.png'.format(zfiil_n)
+            imgs.append(imageio.imread(f'./dataset/data_square/{tgt_class}/'+img_fn))
+            rt_mat = meta['cameras'][i]['extrinsic']['RT_matrix']
+            rt_mat = np.asarray(list(rt_mat.values())).reshape([4,4])
+            poses.append(rt_mat)
+        
+        imgs = (np.array(imgs) / 255.).astype(np.float32) # keep all 4 channels (RGBA)
+        poses = np.array(poses).astype(np.float32)
+        camera_angle_x = meta['cameras'][0]['intrinsic']['focalLength_inMilimeters']
+        camera_angle_x = float(camera_angle_x)*10
+        H, W = imgs.shape[1:3]
+        focal = camera_angle_x
+        
+        rot_poses = np.array([x_rot(-np.pi/2).dot(pose) for pose in poses]) # for 90° Rotation in x-axis
+        rot_poses[:,:3,:3] = np.asarray([-(pose[:3,:3]) for pose in rot_poses],dtype=np.float32)# 노말 방향 반대로 변환 함.
+        poses = -rot_poses
 
-
-    H, W = imgs[0].shape[:2]
-    camera_angle_x = float(meta['camera_angle_x'])
-    focal = .5 * W / np.tan(.5 * camera_angle_x)
-
+        
     if resized_res:
-        print('resize res ',resized_res,':',H,W,focal,'-->',H//resized_res,W//resized_res,focal/resized_res)
+        print(resized_res,':',H,W,focal,'-->',H//resized_res,W//resized_res,focal/resized_res)
         H = H//resized_res
         W = W//resized_res
         focal = focal/resized_res
-
+        
         imgs_reszed_res = np.zeros((imgs.shape[0], H, W, 3))
         for i, img in enumerate(imgs):
             imgs_reszed_res[i] = cv2.resize(img, (W, H), interpolation=cv2.INTER_AREA)
@@ -105,9 +136,8 @@ def load_data(tgt_class,json_path,resized_res=True):
 
     data = {'images':imgs, 'poses':poses, 'focal':np.array(focal)}
     
-    print(f'Images shape: {imgs.shape}')
-    print(f'Poses shape: {poses.shape}')
-    print(f'Focal length: {focal}')
+    print(f'Images shape: {imgs.shape}',f'Poses shape: {poses.shape}',f'Focal length: {focal}')
+
     return data
 
 

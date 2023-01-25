@@ -14,14 +14,15 @@ def get_parser():
     parser.add_argument('--training', type=bool, default=False)
     parser.add_argument('--testing', type=bool, default=False)
     parser.add_argument('--rendering', type=bool, default=False) 
+    parser.add_argument('--colmap_pose', type=bool, default=False)
     parser.add_argument('--gpu_num', type=str, default=0,required=True)     
     return parser
 
-def get_data(tgt_class,resized_res):
+def get_data(tgt_class,resized_res,args):
     
     print('...get data (tgt_class) : {}'.format(tgt_class))
     
-    data = load_data(tgt_class,json_path='./dataset/transforms.json',resized_res=resized_res)
+    data = load_data(tgt_class,json_path='./dataset/cameras.json',args=args, resized_res=resized_res)
     
     images_arr = data['images'][:,:,:,:3]
     poses_arr = data['poses']
@@ -31,9 +32,9 @@ def get_data(tgt_class,resized_res):
     
     near, far = 2., 6.
     
-    images = torch.from_numpy(images_arr).to(device)
-    poses = torch.from_numpy(poses_arr).to(device)
-    focal = torch.from_numpy(focal_arr).to(device)
+    images = torch.from_numpy(images_arr).to(device).float()
+    poses = torch.from_numpy(poses_arr).to(device).float()
+    focal = torch.from_numpy(focal_arr).to(device).float()
     
     torch_data = {'height':height,'width':width, 'near':near,'far':far
                   ,'images':images,'poses':poses,'focal':focal}
@@ -373,7 +374,7 @@ def testing(tgt_class):
     ckpt = torch.load('./logs/model/{}_model.tar'.format(tgt_class))
     model, fine_model = ckpt['model'], ckpt['fine_model']
 
-    for idx,ds_name in zip(range(19,21),['ValSet','TestSet']):
+    for idx,ds_name in zip(range(22,23),['ValSet','TestSet']):
 
         pose = poses[idx]
         rays_o, rays_d = get_rays(height, width, focal, pose)
@@ -458,7 +459,7 @@ if __name__ == '__main__':
     print('4. cuda available:', torch.cuda.is_available())
     print('5. torch version:', torch.__version__)
 
-    data = get_data(tgt_class,resized_res)    
+    data = get_data(tgt_class,resized_res,args)    
     
     for key,value in data.items():
         globals()[key] =value
