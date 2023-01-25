@@ -4,7 +4,7 @@
 - Reference source : https://github.com/yenchenlin/nerf-pytorch
 - Reference Paper : https://arxiv.org/abs/2003.08934
 
-NIA 39-1-2 3D 에셋-이미지쌍 데이터 (2023.01.31)
+과제명 : NIA 39-1-2 3D 에셋-이미지쌍 데이터 (2023.01.31)
 
 <img src="logs/rendering/1-5-16_12_knitted-toy-cat-stand_3_2_1_polygon_video.gif">
 
