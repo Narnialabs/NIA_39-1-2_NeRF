@@ -55,7 +55,7 @@ docker_run.sh
 
 ### 2.1 NeRF 모델 학습 명령어 실행
 ---------------------------------
-	python run_nerf.py --config config.yaml --training True --testing True --rendering True --gpu_num 0 
+	python run_nerf.py --config ./config/asset_1_1.yaml --training True --testing True --rendering True --gpu_num 0 
 
 	#"gpu_num"은 내가 사용하고자 하는 gpu의 번호
 	#"config.yaml" 파일에 들어가서 학습하고자하는 에셋 및 학습 iteration을 변경할 수 있음 
