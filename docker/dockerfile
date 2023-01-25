@@ -26,7 +26,7 @@ RUN pip3 --version
 RUN apt install yum git curl wget vim zsh net-tools sudo gcc -y
 RUN apt-get -y install libgl1-mesa-glx
 
-RUN apt install -y colmap ffmpeg
+RUN apt install -y colmap ffmpeg zip
 
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 RUN git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting
