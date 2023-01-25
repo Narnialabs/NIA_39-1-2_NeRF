@@ -4,6 +4,8 @@
 
 NIA 39-1-2 3D 에셋-이미지쌍 데이터 (2023.01.31)
 
+<img src="logs/rendering/1-5-16_12_knitted-toy-cat-stand_3_2_1_polygon_video.gif">
+
 # 1. 학습 환경 설치
 
 학습데이터셋 구성
@@ -107,7 +109,6 @@ NIA 39-1-2 3D 에셋-이미지쌍 데이터 (2023.01.31)
 
 ---------------------------------
 <img src="logs/ckpt_1-5-16_12_knitted-toy-cat-stand_3_2_1_polygon.gif">
-<img src="logs/rendering/1-5-16_12_knitted-toy-cat-stand_3_2_1_polygon_video.gif">
 
 
 # 3. Utils
