@@ -43,7 +43,7 @@ docker_run.sh
 # 2. AI Model
 ---------------------------------
 	# 관련 코드 및 라이브러리 다운로드
-	git clone https://github.com/summeryoo/nerf-pytorch.git
+	git clone https://github.com/Narnialabs/NIA_39-1-2_NeRF.git
 	cd nerf-pytorch
 	pip install -r requirements.txt
 
