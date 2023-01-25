@@ -1,4 +1,6 @@
 # NIA_39-1-2_pytorch_NeRF
+<img src='https://blog.kakaocdn.net/dn/cjJsR4/btrJSl8v7Rp/pV2c7fk9KVqzQouX6EH6z0/img.png'>
+
 - Reference source : https://github.com/yenchenlin/nerf-pytorch
 - Reference Paper : https://arxiv.org/abs/2003.08934
 
