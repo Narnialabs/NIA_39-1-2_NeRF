@@ -13,3 +13,4 @@ docker run --gpus all --name pytorch_nerf -v $(pwd):/home/Nia_AI -p 3901:8888 -i
 #도커 실행하기
 docker start pytorch_nerf
 docker exec -it pytorch_nerf bash
+alias python=python3
