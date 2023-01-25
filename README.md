@@ -6,7 +6,29 @@ NIA 39-1-2 3D 에셋-이미지쌍 데이터 (2023.01.31)
 
 # 1. 학습 환경 설치
 
-environment
+학습데이터셋 구성
+---------------------------------
+	최상
+	- Po : 1-5-23_20_minicooper-luggage-minicar_5_1_1_nurbs
+	- Np : 2-16-2_24_leather-white-wood-3+-seater-recliner_5_5_1_polygon
+
+	상
+	- Po : 1-7-21_9_pink-cylinder-rice-cooker_4_2_1_nurbs
+	- Np : 2-17-6_15_silver-round-streetlight_4_4_1_polygon
+
+	중
+	- Po : 1-5-16_12_knitted-toy-cat-stand_3_2_1_polygon
+	- Np : 2-21-2_7_retro-style-mint-oven_3_3_1_polygon 
+	하
+	- Po : 1-7-20_20_beige-body-juicer_2_2_1_nurbs
+	- Np : 2-16-12_22_square-pillow-bean-bag_2_4_1_polygon
+
+	최하
+	- Po : 1-11-16_17_white-vivid-sport-goggles_1_2_1_polygon
+	- Np : 2-14-10_24_Yellow-TopBottom-Solid-Square-Stool_1_2_1_nurbs
+----------------------------------
+
+하드웨어
 ---------------------------------
 	GPU : NVIDIA A100
 	Ubuntu : v18.04
