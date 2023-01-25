@@ -6,7 +6,7 @@ reference source code : https://github.com/yenchenlin/nerf-pytorch
 NIA 39-1-2 3D 에셋-이미지쌍 데이터 (2023.01.31)
 
 
-1. 학습 환경 설치
+# 1. 학습 환경 설치
 
 1.1. 도커 자동 실행 파일 작성
 ---------------------------------
@@ -42,7 +42,7 @@ docker_run.sh
 	cd /home/Nia_AI
 ---------------------------------
 
-2. AI Model
+# 2. AI Model
 ---------------------------------
 	# 관련 코드 및 라이브러리 다운로드
 	git clone https://github.com/summeryoo/nerf-pytorch.git
