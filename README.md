@@ -42,6 +42,10 @@
 
 1.1. 도커 자동 실행 파일 작성 (docker_run.sh)
 ---------------------------------
+	# 관련 코드 및 라이브러리 다운로드
+	git clone https://github.com/Narnialabs/NIA_39-1-2_NeRF.git
+	cd docker
+	
 	#도커 이미지명 (nia39-1/ubuntu/pytorch/nerf)
 	
 	## (1) 도커 파일로 이미지 만들기## 
@@ -78,9 +82,7 @@
 <img src="logs/ckpt_1-5-16_12_knitted-toy-cat-stand_3_2_1_polygon.gif">
 
 ---------------------------------
-	# 관련 코드 및 라이브러리 다운로드
-	git clone https://github.com/Narnialabs/NIA_39-1-2_NeRF.git
-	cd nerf-pytorch
+	cd ..
 	pip install -r requirements.txt
 
 	# 데이터셋 압축풀기
