@@ -72,6 +72,9 @@ NIA 39-1-2 3D 에셋-이미지쌍 데이터 (2023.01.31)
 ---------------------------------
 
 # 2. AI 모델 빌드
+
+<img src="logs/ckpt_1-5-16_12_knitted-toy-cat-stand_3_2_1_polygon.gif">
+
 ---------------------------------
 	# 관련 코드 및 라이브러리 다운로드
 	git clone https://github.com/Narnialabs/NIA_39-1-2_NeRF.git
@@ -108,7 +111,6 @@ NIA 39-1-2 3D 에셋-이미지쌍 데이터 (2023.01.31)
 	    │   ├── tgt_class_video.png # 360 각도 뷰 렌더링 결과 저장
 
 ---------------------------------
-<img src="logs/ckpt_1-5-16_12_knitted-toy-cat-stand_3_2_1_polygon.gif">
 
 
 # 3. Utils
