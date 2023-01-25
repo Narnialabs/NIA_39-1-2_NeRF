@@ -6,12 +6,11 @@ reference source code : https://github.com/yenchenlin/nerf-pytorch
 NIA 39-1-2 3D 에셋-이미지쌍 데이터 (2023.01.31)
 
 
-## 1. 학습 환경 설치 
+1. 학습 환경 설치
 
 1.1. 도커 자동 실행 파일 작성
-
-docker_run.sh
 ---------------------------------
+docker_run.sh
 	#도커 이미지명 (nia39-1/ubuntu/pytorch/nerf)
 	
 	## (1) 도커 파일로 이미지 만들기## 
@@ -28,25 +27,22 @@ docker_run.sh
 ---------------------------------
 
 1.2. 도커 배치 파일 명령어 실행
-
 ---------------------------------
 	bash docker_run.sh
 ---------------------------------
 
 1.3. 컨테이너 접속 후 파이썬 버전 변경 
-
 ---------------------------------
 	#python 확인 후 버전이 2.x 버전일 시 아래와 같이 명령어를 입력함.
 	alias python=="python3"
 ---------------------------------
 
 1.4. 폴더 이동 
-
 ---------------------------------
 	cd /home/Nia_AI
 ---------------------------------
 
-## 2. AI Model
+2. AI Model
 ---------------------------------
 	# 관련 코드 및 라이브러리 다운로드
 	git clone https://github.com/summeryoo/nerf-pytorch.git
@@ -58,7 +54,6 @@ docker_run.sh
 ---------------------------------
 
 2.1. NeRF 모델 학습 명령어 실행
-
 ---------------------------------
 	python run_nerf.py --config ./config/asset_1_1.yaml --training True --testing True --rendering True --gpu_num 0 
 	
@@ -66,7 +61,7 @@ docker_run.sh
 	#"config.yaml" 파일에 들어가서 학습하고자하는 에셋 및 학습 iteration을 변경할 수 있음 
 ---------------------------------
 
-## 3. Utils
+3. Utils
 ---------------------------------
 	# (1) 정사각 이미지가 아닌경우 crop_images.py 를 이용해서 정사각 이미지로 처리 할 수 있음.
 	python crop_images.py --src_path [소스경로] --tgt_asset [타겟에셋명] --dst_path [저장경로](옵션[default './dataset/data_square/'폴더에 저장됨])
