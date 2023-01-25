@@ -81,10 +81,11 @@ z_rot = lambda theta: np.array([[np.cos(theta),-np.sin(theta),0,0]
                                ,[0,0,0,1]])
 
 
-def load_data(tgt_class, json_path,args,resized_res=False):
+def load_data(tgt_class, args,resized_res=False):
     
-    with open(json_path, 'r') as fp:
+    with open(args.json_path, 'r') as fp:
         meta = json.load(fp)
+        print(meta.keys())
 
     imgs = []
     poses = []
@@ -121,7 +122,6 @@ def load_data(tgt_class, json_path,args,resized_res=False):
         rot_poses = np.array([x_rot(-np.pi/2).dot(pose) for pose in poses]) # for 90° Rotation in x-axis
         rot_poses[:,:3,:3] = np.asarray([-(pose[:3,:3]) for pose in rot_poses],dtype=np.float32)# 노말 방향 반대로 변환 함.
         poses = -rot_poses
-
         
     if resized_res:
         print(resized_res,':',H,W,focal,'-->',H//resized_res,W//resized_res,focal/resized_res)

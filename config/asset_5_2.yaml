@@ -7,4 +7,4 @@ parameters:
     tgt_class : '2-16-2_24_leather-white-wood-3+-seater-recliner_5_5_1_polygon' # 최하 에셋 PO
     savedir : './logs/'
     resized_res : 6
-    json_path : './dataset/transforms.json'
+    json_path : './dataset/cameras.json'

@@ -7,4 +7,4 @@ parameters:
     tgt_class : '1-7-21_9_pink-cylinder-rice-cooker_4_2_1_nurbs' # 최하 에셋 PO
     savedir : './logs/'
     resized_res : 6
-    json_path : './dataset/transforms.json'
+    json_path : './dataset/cameras.json'

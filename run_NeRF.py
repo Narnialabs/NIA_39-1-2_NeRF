@@ -15,14 +15,16 @@ def get_parser():
     parser.add_argument('--testing', type=bool, default=False)
     parser.add_argument('--rendering', type=bool, default=False) 
     parser.add_argument('--colmap_pose', type=bool, default=False)
-    parser.add_argument('--gpu_num', type=str, default=0,required=True)     
+    parser.add_argument('--gpu_num', type=str, default=0,required=True)
+    parser.add_argument('--json_path', type=str, default='./dataset/cameras.json') 
+    
     return parser
 
 def get_data(tgt_class,resized_res,args):
     
     print('...get data (tgt_class) : {}'.format(tgt_class))
     
-    data = load_data(tgt_class,json_path='./dataset/cameras.json',args=args, resized_res=resized_res)
+    data = load_data(tgt_class,args=args, resized_res=resized_res)
     
     images_arr = data['images'][:,:,:,:3]
     poses_arr = data['poses']
@@ -443,6 +445,9 @@ if __name__ == '__main__':
     for key,value in params.items():
         globals()[key] = value
         
+    if 'json_path' in params.keys():
+        args.json_path = params['json_path']
+            
     # GPU Setting
     os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu_num
     os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"  # Arrange GPU devices starting from 0
@@ -452,12 +457,6 @@ if __name__ == '__main__':
     seed = 3407
     torch.manual_seed(seed)
     np.random.seed(seed)
-
-    print('1. Device:', device)
-    print('2. Current cuda device:', torch.cuda.current_device())
-    print('3. Count of using GPUs:', torch.cuda.device_count())
-    print('4. cuda available:', torch.cuda.is_available())
-    print('5. torch version:', torch.__version__)
 
     data = get_data(tgt_class,resized_res,args)    
     
