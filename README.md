@@ -88,6 +88,28 @@ NIA 39-1-2 3D 에셋-이미지쌍 데이터 (2023.01.31)
 	#"config.yaml" 파일에 들어가서 학습하고자하는 에셋 및 학습 iteration을 변경할 수 있음 
 ---------------------------------
 
+2.2. outputs
+---------------------------------
+
+	└── logs
+	    ├── model
+	    │   ├── tgt_class_model.tar # 학습 완료된 모델 저장
+	    ├── checkpoint
+	    │   ├── tgt_class_folder
+	    │       ├── result_0.png # 500 번에 한번씩 체크포인트 결과 저장
+	    │       ├── result_500.png
+	    ├── testing
+	    │   ├── tgt_class_folder
+	    │       ├── TestSet_result.png # 테스트 결과 저장
+	    │       ├── ValSet_result.png # 검증 결과 저장
+	    ├── rendering
+	    │   ├── tgt_class_video.png # 360 각도 뷰 렌더링 결과 저장
+
+---------------------------------
+<img src="logs/ckpt_1-5-16_12_knitted-toy-cat-stand_3_2_1_polygon.gif">
+<img src="logs/rendering/1-5-16_12_knitted-toy-cat-stand_3_2_1_polygon_video.gif">
+
+
 # 3. Utils
 ---------------------------------
 	# (1) 정사각 이미지가 아닌경우 crop_images.py 를 이용해서 정사각 이미지로 처리 할 수 있음.
