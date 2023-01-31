@@ -14,7 +14,6 @@ def get_parser():
     parser.add_argument('--training', type=bool, default=False)
     parser.add_argument('--testing', type=bool, default=False)
     parser.add_argument('--rendering', type=bool, default=False) 
-    parser.add_argument('--colmap_pose', type=bool, default=False)
     parser.add_argument('--gpu_num', type=str, default=0,required=True)
     parser.add_argument('--json_path', type=str, default='./dataset/cameras.json') 
     
@@ -35,8 +34,8 @@ def get_data(tgt_class,resized_res,args):
     near, far = 2., 6.
     
     images = torch.from_numpy(images_arr).to(device).float()
-    poses = torch.from_numpy(poses_arr).to(device).float()
-    focal = torch.from_numpy(focal_arr).to(device).float()
+    poses  = torch.from_numpy(poses_arr).to(device).float()
+    focal  = torch.from_numpy(focal_arr).to(device).float()
     
     torch_data = {'height':height,'width':width, 'near':near,'far':far
                   ,'images':images,'poses':poses,'focal':focal}
@@ -63,8 +62,7 @@ def init_models():
     model.to(device)
     model_params = list(model.parameters())
     if use_fine_model:
-        fine_model = NeRF(encoder.d_output, n_layers=n_layers, d_filter=d_filter, skip=skip,
-                          d_viewdirs=d_viewdirs)
+        fine_model = NeRF(encoder.d_output, n_layers=n_layers, d_filter=d_filter, skip=skip,d_viewdirs=d_viewdirs)
         fine_model.to(device)
         model_params = model_params + list(fine_model.parameters())
     else:
@@ -376,8 +374,9 @@ def testing(tgt_class):
     ckpt = torch.load('./logs/model/{}_model.tar'.format(tgt_class))
     model, fine_model = ckpt['model'], ckpt['fine_model']
 
-    for idx,ds_name in zip(range(22,23),['ValSet','TestSet']):
+    for idx,ds_name in zip([-2,-1],['ValSet','TestSet']):
 
+        idxes = poses.shape[0]
         pose = poses[idx]
         rays_o, rays_d = get_rays(height, width, focal, pose)
         rays_o = rays_o.reshape([-1, 3])
@@ -409,7 +408,6 @@ def testing(tgt_class):
         diff = (diff * 255).astype("uint8")
         ssims.append(score)
 
-
         imageA = outputs['rgb_map']#.astype(np.uint8)
         imageA = imageA.reshape([height, width, 3])
         imageB = images[idx]#.astype(np.uint8)
@@ -418,10 +416,9 @@ def testing(tgt_class):
         psnr = -10. * torch.log10(loss)
         psnrs.append(psnr.item())
 
-
-        plt.suptitle(ds_name,y=0.85)
+        plt.suptitle(ds_name+'  Data_ID: {} [PSNR: {:.3f} SSIM: {:.3f}]'.format(idxes-idx,psnr.item(),score),y=0.85)
         plt.subplot(1,2,1)
-        plt.title('pred_rgb (PSNR: {:.2} SSIM: {:.2})'.format(psnr.item(),score))
+        plt.title('pred_rgb')
         plt.imshow(imageA_)
         plt.subplot(1,2,2)
         plt.title('true_rgb')
@@ -429,7 +426,7 @@ def testing(tgt_class):
         plt.savefig(testdir+'{}_result.png'.format(ds_name))
         plt.close()
         
-        print('ds_name : {} psnr : {:.4} ssim : {:.4}'.format(ds_name, psnr,score))
+        print('ds_name : {} psnr : {:.3f} ssim : {:.3f}'.format(ds_name, psnr,score))
 
 if __name__ == '__main__':
     
@@ -488,10 +485,11 @@ if __name__ == '__main__':
                 h,m,s = cost_time//(60*60),(cost_time%(60*60))//60, (cost_time%(60*60))%60 
                 print('{:.4} hour {:.4} min {:.4} sec'.format(h,m,s))
                 break
-        
+                    
         print('')
         print(f'Training Done!')
 
+  
     if args.testing == True:
         testing(tgt_class)        
         print('')

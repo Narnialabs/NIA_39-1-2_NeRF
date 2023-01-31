@@ -85,15 +85,17 @@ def load_data(tgt_class, args,resized_res=False):
     
     with open(args.json_path, 'r') as fp:
         meta = json.load(fp)
-        print(meta.keys())
 
     imgs = []
     poses = []
     
-    if args.colmap_pose== True:
-        for i, frame in enumerate(meta['frames']):
-            zfiil_n = str(i).zfill(2)
-            img_fn = 'image_view{}.png'.format(zfiil_n)
+    if 'frames' in meta.keys():
+        print('this is colmap camera data..')
+        for frame in meta['frames']:
+            #print(frame['file_path'])
+            img_fn = frame['file_path'].split('/')[-1]
+            #zfiil_n = str(i).zfill(2)
+            #img_fn = 'image_view{}.png'.format(zfiil_n)
             imgs.append(imageio.imread(f'./dataset/data_square/{tgt_class}/'+img_fn))
             poses.append(np.array(frame['transform_matrix']))
         
@@ -103,8 +105,10 @@ def load_data(tgt_class, args,resized_res=False):
         H, W = imgs.shape[1:3]
         focal = .5 * W / np.tan(.5 * camera_angle_x)
         
-    elif args.colmap_pose == False:
-        for i, data in enumerate(meta['cameras']):
+    elif 'cameras' in meta.keys():
+        print('this is Nia 39-1-2 camera data..')
+        for data in meta['cameras']:
+            i = data['cameraId']
             zfiil_n = str(i).zfill(2)
             img_fn = 'image_view{}.png'.format(zfiil_n)
             imgs.append(imageio.imread(f'./dataset/data_square/{tgt_class}/'+img_fn))
@@ -121,10 +125,10 @@ def load_data(tgt_class, args,resized_res=False):
         
         rot_poses = np.array([x_rot(-np.pi/2).dot(pose) for pose in poses]) # for 90° Rotation in x-axis
         rot_poses[:,:3,:3] = np.asarray([-(pose[:3,:3]) for pose in rot_poses],dtype=np.float32)# 노말 방향 반대로 변환 함.
-        poses = -rot_poses
+        poses = -rot_poses        
         
     if resized_res:
-        print(resized_res,':',H,W,focal,'-->',H//resized_res,W//resized_res,focal/resized_res)
+        #print(resized_res,':',H,W,focal,'-->',H//resized_res,W//resized_res,focal/resized_res)
         H = H//resized_res
         W = W//resized_res
         focal = focal/resized_res
@@ -135,9 +139,7 @@ def load_data(tgt_class, args,resized_res=False):
         imgs = imgs_reszed_res
 
     data = {'images':imgs, 'poses':poses, 'focal':np.array(focal)}
-    
     print(f'Images shape: {imgs.shape}',f'Poses shape: {poses.shape}',f'Focal length: {focal}')
-
     return data
 
 

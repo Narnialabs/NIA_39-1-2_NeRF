@@ -1,7 +1,6 @@
-imageio
-imageio-ffmpeg
-matplotlib
-configargparse
-tqdm
-opencv-python
-scikit-image
+imageio==2.24.0
+matplotlib==3.6.3
+ConfigArgParse==1.5.3
+tqdm==4.64.1
+opencv-python==4.7.0.68 
+scikit-image==0.19.3
