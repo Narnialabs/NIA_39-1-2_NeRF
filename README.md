@@ -124,6 +124,7 @@
 	
 	# (2) colmap 으로 이미지를 추정해서 pose를 추정한 경우 colmap2nerf.py를 이용해서 nerf가 읽어들일수있는 데이터로 처리해줌.
 	# 사전에 colmap_text 폴더를 만들어서 colmap의 output인 cameras.txt, images.txt를 넣고, images 폴더를 만들어서 이미지를 넣어줌
-	python colmap2nerf.py
+	python colmap2nerf.py 
+	# 결과물로 transforms.json
 ---------------------------------
 	
