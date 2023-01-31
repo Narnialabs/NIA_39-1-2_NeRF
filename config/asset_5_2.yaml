@@ -1,10 +1,10 @@
 parameters:
-    warmup_min_fitness : 12
+    warmup_min_fitness : 11
     n_iters : 10000
-    trn_idx : 22 # :19 라고하면 1~18 까지 슬라이싱 됨.
-    tst_idx : 22 # 19번 째가 인덱싱됨. 
+    trn_idx : 19 # :19 라고하면 1~18 까지 슬라이싱 됨.
+    tst_idx : 19 # 19번 째가 인덱싱됨. 
 
     tgt_class : '2-16-2_24_leather-white-wood-3+-seater-recliner_5_5_1_polygon' # 최하 에셋 PO
     savedir : './logs/'
     resized_res : 6
-    json_path : './dataset/cameras.json'
+    json_path : './dataset/colmap_cameras.json'
