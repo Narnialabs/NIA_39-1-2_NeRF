@@ -40,7 +40,7 @@
 ---------------------------------
 
 
-1.1. 도커 자동 실행 파일 작성 (docker_run.sh)
+1.1. 도커 쉘 스크립트 작성 (docker_run.sh)
 ---------------------------------
 	# 관련 코드 및 라이브러리 다운로드
 	git clone https://github.com/Narnialabs/NIA_39-1-2_NeRF.git
