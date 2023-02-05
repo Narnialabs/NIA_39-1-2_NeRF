@@ -104,15 +104,16 @@
 	    ├── model
 	    │   ├── tgt_class_model.tar # 학습 완료된 모델 저장
 	    ├── checkpoint
-	    │   ├── tgt_class_folder
+	    │   └─── tgt_class_folder
 	    │       ├── result_0.png # 500 번에 한번씩 체크포인트 결과 저장
 	    │       ├── result_500.png
-	    ├── testing
-	    │   ├── tgt_class_folder
+	    │       ...
+ 	    ├── testing
+	    │   └─── tgt_class_folder
 	    │       ├── TestSet_result.png # 테스트 결과 저장
-	    │       ├── ValSet_result.png # 검증 결과 저장
+	    │       └── ValSet_result.png # 검증 결과 저장
 	    ├── rendering
-	    │   ├── tgt_class_video.png # 360 각도 뷰 렌더링 결과 저장
+	    │   └─── tgt_class_video.png # 360 각도 뷰 렌더링 결과 저장
 
 ---------------------------------
 
