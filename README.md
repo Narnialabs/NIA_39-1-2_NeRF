@@ -102,7 +102,7 @@
 
 	└── logs
 	    ├── model
-	    │   ├── tgt_class_model.tar # 학습 완료된 모델 저장
+	    │   └── tgt_class_model.tar # 학습 완료된 모델 저장
 	    ├── checkpoint
 	    │   └─── tgt_class_folder
 	    │       ├── result_0.png # 500 번에 한번씩 체크포인트 결과 저장
