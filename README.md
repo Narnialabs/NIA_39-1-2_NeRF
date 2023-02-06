@@ -1,3 +1,4 @@
+![image](https://user-images.githubusercontent.com/109494925/216935624-be690389-c06b-4fc4-bcdc-38064f479315.png)
 
 - **레퍼런스 논문(ECCV 2020 Oral)** : [https://www.matthewtancik.com/nerf](https://www.matthewtancik.com/nerf)
 - **레퍼런스 소스코드(pytorch)** : [https://github.com/yenchenlin/nerf-pytorch](https://github.com/yenchenlin/nerf-pytorch)
