@@ -1,4 +1,4 @@
-[image](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/365d3f84-1f60-44da-8da2-b787abfffbf0/Untitled.png) 
+[image]([https://s3-us-west-2.amazonaws.com/secure.notion-static.com/365d3f84-1f60-44da-8da2-b787abfffbf0/Untitled.png](https://uploads-ssl.webflow.com/51e0d73d83d06baa7a00000f/5e700ef6067b43821ed52768_pipeline_website-01-p-800.png) 
 
 - **레퍼런스 논문(ECCV 2020 Oral)** : [https://www.matthewtancik.com/nerf](https://www.matthewtancik.com/nerf)
 - **레퍼런스 소스코드(pytorch)** : [https://github.com/yenchenlin/nerf-pytorch](https://github.com/yenchenlin/nerf-pytorch)
