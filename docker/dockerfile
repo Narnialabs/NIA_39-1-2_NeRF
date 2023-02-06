@@ -1,4 +1,4 @@
-FROM nvidia/cuda:11.3.0-devel
+FROM nvidia/cuda:11.3.0-cudnn8-devel-ubuntu18.04
 
 LABEL purpose = 'ubuntu environment 18.04v' \
       last_modified = '22.11.02 / 20:01'
