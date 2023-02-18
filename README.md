@@ -79,7 +79,7 @@ bash docker_run.sh
 docker start pytorch_nerf # pytorch_nerf 컨테이너가 실행하지 않은 경우
 docker exec -it pytorch_nerf bash # 컨테이너를 설 실행후 해당 명령어로 접속함
 #python 확인 후 버전이 2.x 버전일 시 아래와 같이 명령어를 입력함.
-alias python=="python3"
+alias python=python3
 cd /home/Nia_AI/
 #파이썬 라이브러리 다운로드 받음
 pip install -r requirements.txt
