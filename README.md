@@ -112,17 +112,17 @@ python run_nerf.py  --gpu_num 0 --config ./config/asset_1_1.yaml --testing True
 #학습이 완료된 후 로그폴더가 자동으로 생성도니 후 모델, 체크포인트, 테스팅, 렌더링 폴더에 결과물이 저장된것을 확인할 수 있습니다.  
 └── logs
     ├── model
-    │   ├── tgt_class_model.tar # 학습 완료된 모델 저장
+    │   └── tgt_class_model.tar # 학습 완료된 모델 저장
     ├── checkpoint
-    │   ├── tgt_class_folder
-    │       ├── result_0.png # 500 번에 한번씩 체크포인트 결과 저장
-    │       ├── result_500.png
+    │   └─── tgt_class_folder
+    │       └─── result_0.png # 500 번에 한번씩 체크포인트 결과 저장
+    │       └─── result_500.png
     ├── testing
-    │   ├── tgt_class_folder
-    │       ├── TestSet_result.png # 테스트 결과 저장
-    │       ├── ValSet_result.png # 검증 결과 저장
+    │   └─── tgt_class_folder
+    │       └─── TestSet_result.png # 테스트 결과 저장
+    │       └─── ValSet_result.png # 검증 결과 저장
     ├── rendering
-    │   ├── tgt_class_video.png # 360 각도 뷰 렌더링 결과 저장
+    │   └─── tgt_class_video.png # 360 각도 뷰 렌더링 결과 저장
 ```
 
 ---
