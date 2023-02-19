@@ -88,44 +88,22 @@ def load_data(tgt_class, args,resized_res=False):
 
     imgs = []
     poses = []
-    
+    files_n = []
     if 'frames' in meta.keys():
         print('this is colmap camera data..')
-        for frame in meta['frames']:
-            #print(frame['file_path'])
-            img_fn = frame['file_path'].split('/')[-1]
-            #zfiil_n = str(i).zfill(2)
-            #img_fn = 'image_view{}.png'.format(zfiil_n)
+        for num in meta['frames']:
+            frame = meta['frames']
+            path = frame[num]['file_path']
+            img_fn = path.split('/')[-1]
             imgs.append(imageio.imread(f'./dataset/data_square/{tgt_class}/'+img_fn))
-            poses.append(np.array(frame['transform_matrix']))
-        
+            poses.append(np.array(frame[num]['transform_matrix']))
+            files_n.append(img_fn)
+            
         imgs = (np.array(imgs) / 255.).astype(np.float32) # keep all 4 channels (RGBA)
         poses = np.array(poses).astype(np.float32)
-        camera_angle_x = float(meta['camera_angle_x'])
+        camera_angle_x = float(meta['camera_angle_x']['0'])
         H, W = imgs.shape[1:3]
-        focal = .5 * W / np.tan(.5 * camera_angle_x)
-        
-    elif 'cameras' in meta.keys():
-        print('this is Nia 39-1-2 camera data..')
-        for data in meta['cameras']:
-            i = data['cameraId']
-            zfiil_n = str(i).zfill(2)
-            img_fn = 'image_view{}.png'.format(zfiil_n)
-            imgs.append(imageio.imread(f'./dataset/data_square/{tgt_class}/'+img_fn))
-            rt_mat = meta['cameras'][i]['extrinsic']['RT_matrix']
-            rt_mat = np.asarray(list(rt_mat.values())).reshape([4,4])
-            poses.append(rt_mat)
-        
-        imgs = (np.array(imgs) / 255.).astype(np.float32) # keep all 4 channels (RGBA)
-        poses = np.array(poses).astype(np.float32)
-        camera_angle_x = meta['cameras'][0]['intrinsic']['focalLength_inMilimeters']
-        camera_angle_x = float(camera_angle_x)*10
-        H, W = imgs.shape[1:3]
-        focal = camera_angle_x
-        
-        rot_poses = np.array([x_rot(-np.pi/2).dot(pose) for pose in poses]) # for 90° Rotation in x-axis
-        rot_poses[:,:3,:3] = np.asarray([-(pose[:3,:3]) for pose in rot_poses],dtype=np.float32)# 노말 방향 반대로 변환 함.
-        poses = -rot_poses        
+        focal = .5 * W / np.tan(.5 * camera_angle_x)    
         
     if resized_res:
         #print(resized_res,':',H,W,focal,'-->',H//resized_res,W//resized_res,focal/resized_res)
@@ -138,7 +116,7 @@ def load_data(tgt_class, args,resized_res=False):
             imgs_reszed_res[i] = cv2.resize(img, (W, H), interpolation=cv2.INTER_AREA)
         imgs = imgs_reszed_res
 
-    data = {'images':imgs, 'poses':poses, 'focal':np.array(focal)}
+    data = {'images':imgs, 'poses':poses, 'focal':np.array(focal),'filenames':np.array(files_n)}
     print(f'Images shape: {imgs.shape}',f'Poses shape: {poses.shape}',f'Focal length: {focal}')
     return data
 
@@ -332,10 +310,7 @@ class EarlyStopping:
         return stop
     
     
-def init_models(device,params):
-    for key,value in params.items():
-        globals()[key] =value
-        
+def init_models(device):
     # Encoders
     encoder = PositionalEncoder(d_input, n_freqs, log_space=log_space)
     encode = lambda x: encoder(x)

@@ -28,6 +28,7 @@ def get_data(tgt_class,resized_res,args):
     images_arr = data['images'][:,:,:,:3]
     poses_arr = data['poses']
     focal_arr = data['focal']
+    filenames_arr = data['filenames']
     
     height, width = images_arr.shape[1:3]
     
@@ -38,7 +39,7 @@ def get_data(tgt_class,resized_res,args):
     focal  = torch.from_numpy(focal_arr).to(device).float()
     
     torch_data = {'height':height,'width':width, 'near':near,'far':far
-                  ,'images':images,'poses':poses,'focal':focal}
+                  ,'images':images,'poses':poses,'focal':focal, 'filenames':filenames_arr}
     
     return torch_data
 
@@ -415,8 +416,8 @@ def testing(tgt_class):
         loss = torch.nn.functional.mse_loss(imageA.reshape(-1, 3), imageB.reshape(-1, 3))
         psnr = -10. * torch.log10(loss)
         psnrs.append(psnr.item())
-
-        plt.suptitle(ds_name+'  Data_ID: {} [PSNR: {:.3f} SSIM: {:.3f}]'.format(idxes-idx,psnr.item(),score),y=0.85)
+        filename = filenames[idx]
+        plt.suptitle(ds_name+'  Data_ID: {} [PSNR: {:.3f} SSIM: {:.3f}]'.format(filename,psnr.item(),score),y=0.85)
         plt.subplot(1,2,1)
         plt.title('pred_rgb')
         plt.imshow(imageA_)
