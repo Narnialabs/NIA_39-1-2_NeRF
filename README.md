@@ -1,5 +1,5 @@
 
-# NIA 39-1 3D 에셋-이미지쌍 데이터 (2023.01.31) ![link](https://www.aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&aihubDataSe=realm&dataSetSn=71412)
+# NIA 39-1 3D 에셋-이미지쌍 데이터 (2023.01.31) [link](https://www.aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&aihubDataSe=realm&dataSetSn=71412)
 ---
 ![image](https://user-images.githubusercontent.com/109494925/216935624-be690389-c06b-4fc4-bcdc-38064f479315.png)
 
