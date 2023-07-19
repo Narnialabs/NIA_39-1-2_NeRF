@@ -1,6 +1,7 @@
 
 # NIA 39-1 3D 에셋-이미지쌍 데이터 (2023.01.31) [link](https://www.aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&aihubDataSe=realm&dataSetSn=71412)
----
+
+
 ![image](https://user-images.githubusercontent.com/109494925/216935624-be690389-c06b-4fc4-bcdc-38064f479315.png)
 
 이 저장소는 NIA 39-1 3D 에셋-이미지쌍 데이터의 View Synthesis 모델을 개발하는 데 사용됩니다. 해당 프로젝트는 Novel view synthesis 작업을 수행하는 NeRF 모델을 기반으로 합니다. 아래에서는 프로젝트의 구조, 작업환경 설정 방법, 데이터셋 목록, 실행 방법, 그리고 결과물에 대한 설명을 제공합니다.
