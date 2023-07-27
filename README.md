@@ -67,7 +67,7 @@
        │       └─── TestSet_result.png # 테스트 결과 저장
        │       └─── ValSet_result.png # 검증 결과 저장
        ├── rendering
-       │   └─── tgt_class_video.png # 360 각도 뷰 렌더링 결과 저장
+       │   └─── tgt_class_video # 360 각도 뷰 렌더링 결과 저장
    ```
 
 ## Utils
